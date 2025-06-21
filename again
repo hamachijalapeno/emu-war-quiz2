@@ -1,0 +1,5 @@
+cd ~/Downloads/emu-war-quiz2
+npm install @vitejs/plugin-react
+git add .
+git commit -m "Install vite plugin for react"
+git push
