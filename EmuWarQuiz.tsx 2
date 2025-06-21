@@ -1,0 +1,106 @@
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+
+const questions = [
+  {
+    q: "What was the Emu War?",
+    options: [
+      "A battle between emus and kangaroos",
+      "A military operation against emus in Western Australia",
+      "An uprising by Australian farmers",
+      "A hoax created in the 2000s"
+    ],
+    answer: 1
+  },
+  {
+    q: "Why did the Emu War happen?",
+    options: [
+      "Emus were attacking humans",
+      "Emus were damaging crops",
+      "Emus were overpopulating cities",
+      "Emus had taken over Parliament"
+    ],
+    answer: 1
+  },
+  {
+    q: "Who led the human side of the Emu War?",
+    options: ["Winston Churchill", "Major G.P.W. Meredith", "Steve Irwin", "Ned Kelly"],
+    answer: 1
+  },
+  {
+    q: "What kind of weapons were used against the emus?",
+    options: ["Tranquilizer darts", "Poison", "Lewis machine guns", "Giant nets"],
+    answer: 2
+  },
+  {
+    q: "How many emus were estimated to be in the area at the time?",
+    options: ["1,000", "5,000", "20,000", "100,000"],
+    answer: 3
+  },
+  {
+    q: "What was the outcome of the Emu War?",
+    options: ["Humans decisively won", "A peace treaty was signed", "Emus emerged victorious", "The emus migrated north"],
+    answer: 2
+  },
+  {
+    q: "What was the Australian government’s response after the war?",
+    options: ["Declared emus a protected species", "Asked for help from the U.S.", "Installed fences to protect crops", "Raised a statue for the emus"],
+    answer: 2
+  }
+];
+
+export default function EmuWarQuiz() {
+  const [current, setCurrent] = useState(0);
+  const [score, setScore] = useState(0);
+  const [finished, setFinished] = useState(false);
+
+  const handleAnswer = (index: number) => {
+    if (index === questions[current].answer) {
+      setScore(score + 1);
+    }
+    if (current + 1 < questions.length) {
+      setCurrent(current + 1);
+    } else {
+      setFinished(true);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-pink-50 flex flex-col items-center justify-center p-4 text-center">
+      <h1 className="text-4xl font-extrabold mb-6 text-pink-700">🦤 The Great Emu War Quiz</h1>
+      <Card className="max-w-xl w-full bg-white shadow-lg p-6 rounded-2xl">
+        <CardContent>
+          {!finished ? (
+            <div>
+              <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                {questions[current].q}
+              </h2>
+              <div className="grid gap-4">
+                {questions[current].options.map((option, index) => (
+                  <Button
+                    key={index}
+                    onClick={() => handleAnswer(index)}
+                    className="bg-pink-300 hover:bg-pink-400 text-white text-md"
+                  >
+                    {option}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-green-600">Quiz Complete!</h2>
+              <p className="mt-4 text-lg text-gray-700">
+                You scored {score} out of {questions.length} 🧠
+              </p>
+              <p className="mt-2 text-md text-gray-500">
+                Want to beat your score? Refresh the page and try again!
+              </p>
+            </div>
+          )}
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
