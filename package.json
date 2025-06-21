@@ -1,5 +1,6 @@
+
 {
-  "name": "emu-war-quiz",
+  "name": "emu-war-quiz-site",
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
